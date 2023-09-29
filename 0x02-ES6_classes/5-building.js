@@ -3,9 +3,7 @@ export default class Building {
    * sqft - square fit
    * */
   constructor(sqft) {
-    if (typeof this.evacuationWarningMessage !== 'function') {
-      throw Error('Class extending Building must override evacuationWarningMessage');
-    }
+    if (this.constructor !== Building && this.evacuationWarningMessage === Building.prototype.evacuationWarningMessage) this.evacuationWarningMessage()
     this._sqft = sqft;
 
   }
