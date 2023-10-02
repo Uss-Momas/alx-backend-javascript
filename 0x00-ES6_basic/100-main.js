@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import createIteratorObject from "./100-createIteratorObject.js";
 
 import createEmployeesObject from './11-createEmployeesObject.js';
@@ -11,3 +12,6 @@ const employees = {
 const report = createReportObject(employees);
 
 const reportWithIterator = createIteratorObject(report);
+for (const item of reportWithIterator) {
+    console.log(item);
+}
