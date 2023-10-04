@@ -1,9 +1,8 @@
 export default function cleanSet(set, startString) {
-    const arrayFromSet  = [...set];
-    for (const element of arrayFromSet) {
-        for (const [index, letter] of startString) {
-            
-        }
-    }
-    return [...set].join("-");
+  const arrayFromSet = [...set];
+  const newArray = [];
+  for (const element of arrayFromSet) {
+    if (element.startsWith(startString)) { newArray.push(element.replace(startString, '')); }
+  }
+  return newArray.join('-');
 }
