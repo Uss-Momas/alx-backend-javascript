@@ -45,7 +45,7 @@ async function countStudents(path) {
         // print total number of students per field, and firstname of each
         console.log(`Number of students in ${field}: ${object.total}. List: ${object.listStudens.join(", ")}`);
     }
-    return { field_stats };
+    return { numberStudents: contents.length, field_stats };
 }
 
 module.exports = countStudents;
