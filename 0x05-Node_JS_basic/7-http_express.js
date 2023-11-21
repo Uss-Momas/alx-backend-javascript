@@ -10,18 +10,16 @@ app.get('/', (req, res) => {
 });
 
 app.get('/students', (req, response) => {
-  console.log(process.argv[2]);
   countStudents(process.argv[2])
     .then((result) => {
-      let message = 'This is the list of our students\n';
-      const { fieldStats } = result;
-      const totalStudents = result.numberStudents;
-      message += `Number of students: ${totalStudents}\n`;
+      const { studentsByField } = result;
+      const totalStudents = result.numStudents;
+      const message = ['This is the list of our students', `Number of students: ${totalStudents}`];
 
-      for (const [field, object] of Object.entries(fieldStats)) {
-        message += `Number of students in ${field}: ${object.total}. List: ${object.listStudens.join(', ')}\n`;
+      for (const [field, list] of Object.entries(studentsByField)) {
+        message.push(`Number of students in ${field}: ${list.length}. List: ${list.join(', ')}`);
       }
-      response.send(message);
+      response.send(message.join('\n'));
     })
     .catch((err) => {
       response.status(404);
