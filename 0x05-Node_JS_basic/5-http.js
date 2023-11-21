@@ -19,7 +19,7 @@ const app = http.createServer((req, res) => {
     result.then((value) => {
       const { studentsByField } = value;
       res.write('This is the list of our students\n');
-      let message = [`Number of students: ${value.numStudents}`];
+      const message = [`Number of students: ${value.numStudents}`];
       for (const [field, list] of Object.entries(studentsByField)) {
         message.push(`Number of students in ${field}: ${list.length}. List: ${list.join(', ')}`);
       }
