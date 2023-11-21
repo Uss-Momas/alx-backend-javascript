@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-async function countStudents(path) {
+async function readDatabase(path) {
   try {
     const data = await fs.promises.readFile(path, 'utf8');
     const contents = data.toString().trim().split('\n').splice(1)
@@ -23,4 +23,4 @@ async function countStudents(path) {
   }
 }
 
-module.exports = countStudents;
+module.exports = readDatabase;
