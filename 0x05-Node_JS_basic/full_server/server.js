@@ -1,5 +1,5 @@
 const express = require('express');
-const { default: router } = require('./routes');
+const router = require('./routes');
 
 const app = express();
 const port = 1245;
@@ -12,4 +12,4 @@ app.listen(port, () => {
   console.log(`Listen on port ${port}`);
 });
 
-export default app;
+module.exports = app;
