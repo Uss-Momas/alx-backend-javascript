@@ -17,13 +17,13 @@ const app = http.createServer((req, res) => {
     const result = countStudents(process.argv[2]);
 
     result.then((value) => {
-      const { fieldStats } = value;
+      const { studentsByField } = value;
       res.write('This is the list of our students\n');
-      let message = `Number of students: ${value.numberStudents}\n`;
-      for (const [field, object] of Object.entries(fieldStats)) {
-        message += `Number of students in ${field}: ${object.total}. List: ${object.listStudens.join(', ')}\n`;
+      let message = [`Number of students: ${value.numStudents}`];
+      for (const [field, list] of Object.entries(studentsByField)) {
+        message.push(`Number of students in ${field}: ${list.length}. List: ${list.join(', ')}`);
       }
-      res.end(message);
+      res.end(message.join('\n'));
     }).catch(() => {
       res.statusCode = 404;
       res.end('Cannot load the database');
