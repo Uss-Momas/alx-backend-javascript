@@ -29,13 +29,11 @@ const port = 1245;
 
 const app = http.createServer((req, res) => {
   res.statusCode = 200;
-  const { url } = req;
-
   res.setHeader('Content-Type', 'text/plain');
-  if (url === '/') {
+  if (req.url === '/') {
     res.end('Hello Holberton School!');
   }
-  if (url === '/students') {
+  if (req.url === '/students') {
     const result = countStudents(process.argv[2]);
     result.then((value) => {
       const { studentsByField } = value;
@@ -44,10 +42,11 @@ const app = http.createServer((req, res) => {
       for (const [field, list] of Object.entries(studentsByField)) {
         message.push(`Number of students in ${field}: ${list.length}. List: ${list.join(', ')}`);
       }
-      res.end(message.join('\n'));
+      res.write(message.join('\n'));
+      res.end();
     }).catch(() => {
-      res.statusCode = 404;
       res.end('Cannot load the database');
+      throw new Error('Cannot load the database');
     });
   }
 });
