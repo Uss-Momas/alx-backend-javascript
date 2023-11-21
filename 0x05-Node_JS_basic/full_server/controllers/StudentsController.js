@@ -22,7 +22,18 @@ class StudentsController {
   }
 
   static getAllStudentsByMajor(request, response) {
-    response.status(200).send('Hello Holberton School!');
+    const { major } = request.params;
+    if (major !== 'CS' && major !== 'SWE') {
+      response.status(500).send('Major parameter must be CS or SWE');
+      return;
+    }
+    readDatabase(process.argv[2])
+      .then((studentsByField) => {
+        response.status(200).send(`List: ${studentsByField[major].join(', ')}`);
+      })
+      .catch(() => {
+        response.status(500).send('Cannot load the database');
+      });
   }
 }
 
