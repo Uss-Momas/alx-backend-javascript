@@ -4,7 +4,6 @@ const StudentsController = require('../controllers/StudentsController');
 
 const routes = express.Router();
 
-
 routes.get('/', AppController.getHomePage);
 
 routes.get('/students', StudentsController.getAllStudents);
