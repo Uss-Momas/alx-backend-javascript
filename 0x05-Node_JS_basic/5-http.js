@@ -45,6 +45,7 @@ const app = http.createServer((req, res) => {
       res.write(message.join('\n'));
       res.end();
     }).catch(() => {
+      res.write('This is the list of our students');
       res.end('Cannot load the database');
       throw new Error('Cannot load the database');
     });
