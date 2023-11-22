@@ -23,7 +23,7 @@ app.get('/students', (req, response) => {
     })
     .catch((err) => {
       response.status(404);
-      response.send(err.message);
+      response.send(`This is the list of our students\n${err.message}`);
     });
 });
 
