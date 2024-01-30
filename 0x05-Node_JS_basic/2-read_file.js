@@ -9,32 +9,35 @@ function countStudents(path) {
     throw new Error('Cannot load the database');
   }
 
-  // const students = fs.readFileSync(path, { encoding: 'utf8' })
-  // .split('\n').map((student) => student.trim()).splice(1);
+  const students = fs.readFileSync(path, { encoding: 'utf8' }).toString().trim()
+    .split('\n')
+    .splice(1)
+    .map((student) => student.trim());
 
-  // const NUMBER_OF_STUDENTS = students.length;
+  const NUMBER_OF_STUDENTS = students.length;
+  const messages = [`Number of students: ${NUMBER_OF_STUDENTS}`];
 
-  // console.log(`Number of students: ${NUMBER_OF_STUDENTS}`);
+  const processedStudents = students.map((student) => {
+    const studentInfo = student.split(',');
+    return { firstname: studentInfo[0], field: studentInfo[3] };
+  });
 
-  // const fieldOfStudents = {};
-  // for (const student of students) {
-  //   const studentInfo = student.split(',');
-  //   const field = studentInfo[studentInfo.length - 1];
-  //   fieldOfStudents[field] = { total: 0, listStudens: [] };
-  // }
+  const fieldInfo = {};
 
-  // for (const student of students) {
-  //   const studentInfo = student.split(',');
-  //   const field = studentInfo[studentInfo.length - 1];
-  //   fieldOfStudents[field].total += 1;
-  //   fieldOfStudents[field].listStudens.push(studentInfo[0]);
-  // }
+  for (const student of processedStudents) {
+    fieldInfo[student.field] = { total: 0, list: [] };
+  }
 
-  // for (const [FIELD, object] of Object.entries(fieldOfStudents)) {
-  //   console.log(
-  //     `Number of students in ${FIELD}: ${object.total}. List: ${object.listStudens.join(', ')}`
-  //   );
-  // }
+  for (const student of processedStudents) {
+    fieldInfo[student.field].total += 1;
+    fieldInfo[student.field].list.push(student.firstname);
+  }
+
+  for (const [field, statsObj] of Object.entries(fieldInfo)) {
+    messages.push(`Number of students in ${field}: ${statsObj.total}. List: ${statsObj.list.join(', ')}`);
+  }
+
+  console.log(messages.join('\n'));
 }
 
 module.exports = countStudents;
