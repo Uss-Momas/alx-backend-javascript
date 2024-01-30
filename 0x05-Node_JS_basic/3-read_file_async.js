@@ -37,6 +37,7 @@ async function countStudents(path) {
     }
 
     console.log(messages.join('\n'));
+    return messages;
   } catch (error) {
     throw new Error('Cannot load the database');
   }
