@@ -33,11 +33,12 @@ function countStudents(path) {
     fieldInfo[student.field].list.push(student.firstname);
   }
 
+  console.log(`Number of students: ${NUMBER_OF_STUDENTS}`);
+
   for (const [field, statsObj] of Object.entries(fieldInfo)) {
+    console.log(`Number of students in ${field}: ${statsObj.total}. List: ${statsObj.list.join(', ')}`);
     messages.push(`Number of students in ${field}: ${statsObj.total}. List: ${statsObj.list.join(', ')}`);
   }
-
-  console.log(messages.join('\n'));
 }
 
 module.exports = countStudents;
