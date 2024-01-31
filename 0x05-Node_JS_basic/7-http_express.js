@@ -15,7 +15,7 @@ app.get('/students', async (req, res) => {
     const message = `This is the list of our students\n${messages.join('\n')}`;
     res.send(message);
   } catch (error) {
-    res.send(`This is the list of our students\n${error.message}`)
+    res.send(`This is the list of our students\n${error.message}`);
   }
 });
 
