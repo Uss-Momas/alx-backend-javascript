@@ -7,8 +7,12 @@ const app = http.createServer(async (req, res) => {
   if (req.url === '/') {
     res.write('Hello Holberton School!');
   } else if (req.url === '/students') {
-    const messages = await countStudents(PATH);
-    res.write(`This is the list of our students\n${messages.join('\n')}`);
+    try {
+      const messages = await countStudents(PATH);
+      res.write(`This is the list of our students\n${messages.join('\n')}`);
+    } catch (error) {
+      res.write('This is the list of our students\nCannot load the database');
+    }
   }
   res.end();
 });
